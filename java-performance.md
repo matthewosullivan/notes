@@ -155,6 +155,106 @@ Ten thousand - this is the number of times the method has to be run
 
 ## Structure of Java Memory
 
+See number of buckets in the String Pool
+
+Java 8:
+```
+$ java -XX:+PrintStringTableStatistics main.Main
+Elapsed time was 41744 ms.
+SymbolTable statistics:
+Number of buckets       :     20011 =    160088 bytes, avg   8.000
+Number of entries       :     10949 =    262776 bytes, avg  24.000
+Number of literals      :     10949 =    425448 bytes, avg  38.857
+Total footprint         :           =    848312 bytes
+Average bucket size     :     0.547
+Variance of bucket size :     0.545
+Std. dev. of bucket size:     0.738
+Maximum bucket size     :         6
+StringTable statistics:
+Number of buckets       :     60013 =    480104 bytes, avg   8.000
+Number of entries       :  10000744 = 240017856 bytes, avg  24.000
+Number of literals      :  10000744 = 559969528 bytes, avg  55.993
+Total footprint         :           = 800467488 bytes
+Average bucket size     :   166.643
+Variance of bucket size :    55.345
+Std. dev. of bucket size:     7.439
+Maximum bucket size     :       196
+```
+Default number of buckets: 60013
+
+Increase number of buckets in the String Pool
+
+```
+$ java -XX:+PrintStringTableStatistics -XX:StringTableSize=120121 main.Main
+Elapsed time was 22204 ms.
+SymbolTable statistics:
+Number of buckets       :     20011 =    160088 bytes, avg   8.000
+Number of entries       :     10949 =    262776 bytes, avg  24.000
+Number of literals      :     10949 =    425448 bytes, avg  38.857
+Total footprint         :           =    848312 bytes
+Average bucket size     :     0.547
+Variance of bucket size :     0.545
+Std. dev. of bucket size:     0.738
+Maximum bucket size     :         6
+StringTable statistics:
+Number of buckets       :    120121 =    960968 bytes, avg   8.000
+Number of entries       :  10000744 = 240017856 bytes, avg  24.000
+Number of literals      :  10000744 = 559969528 bytes, avg  55.993
+Total footprint         :           = 800948352 bytes
+Average bucket size     :    83.256
+Variance of bucket size :   492.380
+Std. dev. of bucket size:    22.190
+Maximum bucket size     :       157
+```
+
+Print heap size in bytes
+
+```
+$ java -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal
+uintx MaxHeapSize                              := 4294967296                          {product}
+uintx InitialHeapSize                          := 268435456                           {product}
+```
+
+Change MaxHeapSize
+
+```
+$ java -XX:MaxHeapSize=600m -XX:+PrintStringTableStatistics -XX:StringTableSize=120121 main.Main
+```
+
+Change InitialHeapSize
+
+```
+java -XX:InitialHeapSize=1g -XX:+PrintStringTableStatistics -XX:StringTableSize=120121 main.Main
+```
+
+## Recap
+
+### ```-XX:+PrintStringTableStatistics```
+
+- Find out how big our String Pool is
+- How many buckets
+- How dense our pool is
+
+```$ java -XX:+PrintStringTableStatistics main.Main```
+
+- Change number of buckets with ```-XX:StringTableSize=120121```
+
+- '''-XX:MaxHeapSize=600m''' shortcut ```-Xmx```
+- '''-XX:InitialHeapSize=1g''' shortcut ```-Xms1g```
+
+- Find default values for these ```-XX:+UnlockDiagnosticVMOptions``` and ```-XX:+PrintFlagsFinal```
+
+## Memory Leaks
+
+View stack and heap: JVisualVM
+
+Download for openJDK: https://visualvm.github.io/download.html
+
+Start JVisualVM
+
+```
+$ 
+```
 
 
 
