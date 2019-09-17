@@ -257,7 +257,24 @@ $
 ```
 
 
+### Out Of Memory
 
+## Generate a Heat Dump
+
+what is in the heap at any fixed point in time
+
+Generate heap dump when production JVM crashes
+
+JVM Options
+
+```-XX:+HeatDumpOnOutOfMemoryError```
+```-XX:+HeatDumpPath=someFilePath```
+
+Generate heap dump in VisualVM
+
+Tool to analyse the heap
+
+Eclipse Memory Analyzer Tool
 
 
 
