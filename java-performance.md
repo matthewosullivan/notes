@@ -270,11 +270,17 @@ JVM Options
 ```-XX:+HeatDumpOnOutOfMemoryError```
 ```-XX:+HeatDumpPath=someFilePath```
 
-Generate heap dump in VisualVM
+Generate heap dump in JVisualVM
 
 Tool to analyse the heap
 
 Eclipse Memory Analyzer Tool
+
+## Viewing generations in the heap space using VisualVM
+
+VisualVM install plugin Visual GC
+
+
 
 
 
