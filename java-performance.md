@@ -282,6 +282,10 @@ VisualVM install plugin Visual GC
 
 
 
+# GC Tuning
+
+Monitor how often GC is taking place using argument ```-verbose:gc```
+
 
 
 
