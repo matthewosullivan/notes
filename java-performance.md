@@ -286,6 +286,14 @@ VisualVM install plugin Visual GC
 
 Monitor how often GC is taking place using argument ```-verbose:gc```
 
+```
+java -verbose:gc main
+```
+
+What output means
+
+
+
 
 
 
