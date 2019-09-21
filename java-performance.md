@@ -292,12 +292,103 @@ java -verbose:gc main
 
 What output means
 
+## Tuning GC
+
+Turn of dynamic resizing using flag: ```-XX:-UseAdaptiveSizePolicy``` turned on by default
+
+Check its default setting with ```-XX:+PrintFlagsFinal```
 
 
+## Check default values
+
+```-XX:+PrintFlagsFinal``` check default values
+
+## Check flags on running application using the jinfo command
+
+Get process id of our running application: ```jps```
+
+```
+$ jps
+72144 Main
+36002 
+70135 
+72454 Jps
+71963 Main
+58638 GradleDaemon
+```
+
+Use ```jinfo``` to check flag ```UseAdaptiveSizePolicy```
+
+```
+$ jinfo -flag UseAdaptiveSizePolicy 71963
+-XX:+UseAdaptiveSizePolicy
+```
+
+## Tuning old and young allocation in heap
+
+Allocate more memory to young generation and less memory to the old generation - 
+
+## Tuning Garbage Collection
+
+```-XX:NewRatio=n``` how many times bigger should the old generation be compared to the young generation  
+
+```
+$ java Main -Xmx20m -XX:NewRatio=1
+```
+
+```-XX:SurvivorRatio=n``` how much of the young generation should be taken up by the survivor spaces S0 and S1 - the rest of this will be then eden space.
+
+Check default value
+```
+$ jps
+36002 
+74595 Jps
+74053 Main
+70135 
+71963 Main
+58638 GradleDaemon
+$ jinfo -flag SurvivorRatio 74053
+-XX:SurvivorRatio=8
+```
+
+```-XX:MaxTenuringThreshold```
+
+Choosing a garbage collector
+
+Use Serial GC
+
+```-XX:+UseSerialGC```
+
+Use Parallel GC - default Garbage Collector if you're using Java 8 or below
+
+```-XX:+UserParallelGC```
+
+Mostly Concurrent - of which there are two, both available in Java 8
+- Mark Sweep Collector ```-XX:+UseConcMarkSweepGC``` Java 9 default garbage collector
+- G1 Collector ```-XX:+UseG1GC``` Java 10 default garbage collector
+
+## Tuning G1 collector
 
 
+## String De-duplication
 
+```-XX:UseStringDeDuplication``` only available if using G1 garbage collector
 
+option for creating more available space on the heap
+
+## Using a profiler - JMC
+
+https://github.com/JDKMissionControl/jmc
+
+Building JMC from source
+
+```
+$ javac -version
+javac 1.8.0_212
+$ echo $JAVA_HOME
+/Library/Java/JavaVirtualMachines/jdk8u212-b04/Contents/Home
+$ git clone https://github.com/JDKMissionControl/jmc.git
+```
 
 
 
