@@ -388,6 +388,14 @@ javac 1.8.0_212
 $ echo $JAVA_HOME
 /Library/Java/JavaVirtualMachines/jdk8u212-b04/Contents/Home
 $ git clone https://github.com/JDKMissionControl/jmc.git
+
+```
+## Running JMC and connecting to a VM
+
+## Start flight recording from command line
+
+```
+-XX:StartFlightRecording=delay=2min,duration=60s,name=Test,filename=recording.jfr,settings=profile
 ```
 
 
